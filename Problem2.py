@@ -36,6 +36,8 @@ class Solution:
 
 	def mergeKLists2(self, lists):
 		# This works fine if I don't have the repeated elements
+		# Here we insert the (value, ListNode) tuple into the priority queue
+		# Because in heapq if we add a list it will consider the first element of the list for comparison and if the first element is same then it uses the second element of the list for comparison which is an object in this case and it fails with an error if we compare the objects using '<' or '>' symbols
 		# If there are repeated elements then it fails with error "TypeError: '<' not supported between instances of 'ListNode' and 'ListNode'"
 		# Because of these issues I don't know if I can submit on leetcode
 		# Time Complexity : O(nlog(k))
@@ -57,6 +59,7 @@ class Solution:
 	def mergeKLists3(self, lists: List[ListNode]) -> ListNode:
 		# Time Complexity : O(nK) where n is the average length of the list and K is the number of lists
 		# Failed on LeetCode : Time limit exceeded for one testcase
+		# Have k pointers each one moving simultaneously moving on each of its list
 		dummy = ListNode(0)
 		res = dummy
 		while any(lists):
@@ -79,6 +82,7 @@ class Solution:
 	def mergeKLists(self, lists: List[ListNode]) -> ListNode:
 		# Time Complexity : O(nK) where n is the average length of the list and K is the number of lists
 		# Passes on LeetCode
+		# Here we have our own ListNode class where we have overwritten the less than operation. We insert only the ListNodes into priority queue
 		dummy = ListNode(0)
 		res = dummy
 		while any(lists):

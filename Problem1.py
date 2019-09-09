@@ -13,6 +13,8 @@ class Solution:
 	def kthSmallest2(self, matrix: List[List[int]], k: int) -> int:
 		# Time Complexity : O(klogn)
 		# Accepted on leetcode
+		# Since rows and columns are in sorted order so we can use a min heap of size equal to the number of columns in the matrix
+		# We pop from the priority queue k time and the last value will be our kth smallest element
 		queue = []
 		for i in range(len(matrix)):
 			heapq.heappush(queue, (matrix[i][0], i, 0))
@@ -27,6 +29,7 @@ class Solution:
 
 	def kthSmallest4(self, matrix: List[List[int]], k: int) -> int:
 		# what is the time complexity of this?
+		# Similar to the Binary search (which we do it on array)
 		left = matrix[0][0]
 		right = matrix[-1][-1]
 		while left < right:
