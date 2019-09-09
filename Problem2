@@ -1,0 +1,32 @@
+class Problem2 {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0)
+            return null;
+        PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>(lists.length, new Comparator<ListNode>(){
+            public int compare(ListNode node1, ListNode node2){
+                return node1.val - node2.val;
+            }});
+        
+        for(ListNode list : lists){
+            if(list != null)
+                pq.add(list);
+        }
+        
+        ListNode result = new ListNode(0);
+        ListNode temp = result;
+        
+        while(pq.size() > 0){
+            ListNode node = pq.poll();
+             temp.next = node;
+            if(node.next != null)
+                pq.add(node.next);
+            temp = temp.next;
+        }
+        return result.next;
+    }
+}
+
+// Time complexity O(Nlog(k)) where N is the total nodes in final linkedlist and 
+// k length of lists array.
+// Space complexity O(k) where k is the length of lists array.
+// Tested in leetcode.
