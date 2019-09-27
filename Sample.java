@@ -18,3 +18,49 @@ class Solution {
        return pq.poll();
     }
 }
+
+// Time complexity: O(nlogk) 
+// Space Complexity: O(k * length of each list)
+// Approach: Keep a priority queue which conatins the k nodes that has to be compared.
+// At each iteration, get the min element node out of the k nodes from priority queue and push its next node to queue.
+// and construct a new ListNode in the order of the popped nodes.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length==0) return null;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, new MyComparator());
+        for(int i=0;i<lists.length;i++){
+            if(lists[i]!=null){
+                pq.add(lists[i]);
+            }
+        }
+        ListNode head = new ListNode(0);
+        ListNode tmp = head;
+        while(!pq.isEmpty()){
+            ListNode popped = pq.poll();
+            tmp.next = popped;
+            tmp=tmp.next;
+            if(popped.next!=null){
+                pq.add(popped.next);
+            }
+        }
+        return head.next;
+    }
+}
+
+class MyComparator implements Comparator<ListNode>{
+    public int compare(ListNode node1, ListNode node2){
+        if(node1.val>node2.val){
+            return 1;
+        }
+        else return -1;
+    }
+}
