@@ -25,12 +25,25 @@ class MergeKSortedList {
     private ListNode merge(ListNode l1, ListNode l2){
         if(null == l1){return l2;}
         if(null == l2){return l1;}
-        if(l1.val < l2.val){
-            l1.next = merge(l1.next,l2);
-            return l1;
-        }else{
-            l2.next = merge(l2.next,l1);
-            return l2;
+        ListNode result = new ListNode(Integer.MIN_VALUE);
+        ListNode current = result;
+        while(null != l1 && null != l2){
+            if(l1.val < l2.val){
+                current.next = l1;
+                current = current.next;
+                l1 = l1.next;
+            }else{
+                current.next = l2;
+                current = current.next;
+                l2 = l2.next;
+            }
         }
+        if(null != l1){
+            current.next = l1;
+        }
+        if(null != l2){
+            current.next = l2;
+        }
+    return result.next;
     }
 }
