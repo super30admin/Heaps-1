@@ -26,8 +26,8 @@ class Solution(object):
         while not pq.empty():
             val,node=pq.get()
             curr.next=ListNode(val)
-            curr=curr.next
-            node=node.next
+            curr=curr.next # list being created
+            node=node.next # original node
             if node:
                 pq.put((node.val,node))
         return dummy.next
@@ -63,8 +63,8 @@ class Solution(object):
         while pq:
             smallest=heapq.heappop(pq)[1]
             curr.next=smallest
-            curr=curr.next
-            if smallest.next:
+            curr=curr.next # it is being created
+            if smallest.next: 
                 heapq.heappush(pq,(smallest.next.val,smallest.next))
         return dummy.next
             
