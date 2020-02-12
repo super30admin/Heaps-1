@@ -1,5 +1,6 @@
 //Time Complexity: O(log(n))
 //Space Complexity: O(log(n))
+//using MAX HEAP -> inserting all elements in the queue and then removing k times
 
 class Solution {
     
@@ -16,6 +17,24 @@ class Solution {
         //for elements total size of the queue - k elements
         for(int i=0; i< size-k; i++){
             //remove other than k elements from the queue
+            queue.remove();
+        }
+        return queue.remove();
+    }
+}
+
+/************************************************************** */
+
+//using MIN HEAP
+class Solution {
+    
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        for(int i=0; i<nums.length; i++){  
+            queue.add(nums[i]);     
+        }
+        int size = queue.size();
+        if(size > k){
             queue.remove();
         }
         return queue.remove();
