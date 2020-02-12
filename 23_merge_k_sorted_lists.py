@@ -8,9 +8,6 @@ class ListNode:
         self.val = x
         self.next = None
 
-    def __lt__(self, other):
-        return self.val < other.val
-
 
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
