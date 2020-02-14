@@ -22,7 +22,6 @@ public class BigN84MergeSortedArrayONKSolution {
 		// edge case
 		if (lists == null || lists.length == 0)
 			return null;
-		// Dont make two nodes dummy of -1 value
 		ListNode merged = new ListNode(Integer.MIN_VALUE);
 		ListNode result = merged;
 		for (ListNode list : lists) {
