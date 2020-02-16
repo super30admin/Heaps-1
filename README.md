@@ -1,6 +1,6 @@
 # Heaps-1
 
-## Problem1 
+## Problem83 
 Kth largest in Array (https://leetcode.com/problems/kth-largest-element-in-an-array/)
 
 Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.
@@ -20,7 +20,7 @@ Output: 4
 Note:
 You may assume k is always valid, 1 ≤ k ≤ array's length.
 
-## Problem2
+## Problem84
 
 Merge k Sorted Lists(https://leetcode.com/problems/merge-k-sorted-lists/)
 
