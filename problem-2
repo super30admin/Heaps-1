@@ -1,0 +1,39 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+//Time: O(k+nlogk) ~ O(nlogk) : logk because at any particular time queue will have k no of elements so logk operations happen, n is for traversing each elem in list
+//space: O(k) where k is the no of lists
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode dummy=new ListNode(-1);
+        PriorityQueue<ListNode> pq=new PriorityQueue<>((a,b)->a.val-b.val);
+        //dummy is changing later on so we need to store the dummy address in result
+        ListNode result=dummy;
+        //put heads of all lists
+        for(ListNode head:lists)
+        {
+            if(head!=null)
+            pq.add(head);
+        }
+        //check until queue is empty
+        while(!pq.isEmpty())
+        {
+            ListNode min=pq.poll();
+            //point dummy towards first head u get from queue as a min element
+            dummy.next=min;
+            //forward dummy pointer to next node 
+            dummy=dummy.next;
+            //move min pointer to its next because we added min to queue
+            if(min.next!=null)
+            {
+                pq.add(min.next);
+            }
+        }
+        return result.next;
+    }
+}
