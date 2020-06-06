@@ -1,7 +1,7 @@
 #Time Complexity : O(nkLogk) where N is number of nodes in sorted list and k is the number 
 #of lists to merge and logk for hepify
 
-# Space Complexity : O(K) where K is number of lists
+# Space Complexity : O(nK) where K is number of lists
 
 /**
  * Definition for singly-linked list.
