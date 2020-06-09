@@ -1,4 +1,4 @@
-// Time Complexity : O(nk); n= average number of nodes in list; k=number of lists to merge
+// Time Complexity : O(nk)logk; n= average number of nodes in list; k=number of lists to merge
 // Space Complexity : O(k) - priority queue only contains k nodes at a time 
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
