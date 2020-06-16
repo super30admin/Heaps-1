@@ -1,0 +1,90 @@
+PROBLEM 1 - Kth largest in Array
+// Time Complexity :O(n)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :Yes
+
+class Solution {
+    
+    func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
+        var sNums = nums
+        let size = sNums.count
+        return quickSelect(&sNums, 0, size-1, size-k)
+    }
+    
+    func quickSelect(_ nums: inout [Int],  _ start:Int, _ end:Int, _ k:Int) -> Int{
+         if (start == end) { return nums[start] }
+        let p = partition(&nums, start, end)
+        if p == k{ return nums[p] }
+        if k < p{ return quickSelect(&nums, start, p-1, k) }
+        return quickSelect(&nums, p+1, end, k)
+    }
+    
+    func partition(_ nums: inout [Int], _ start:Int, _ end:Int)->Int{
+        let randomIndex = Int.random(in: start...end)
+        swap(&nums, start, randomIndex)
+        var left = start
+        for i in start+1...end{
+            if nums[i] < nums[start] {
+                left += 1
+                swap(&nums, left, i)
+            }
+        }
+        swap(&nums, start, left)
+        return left
+    }
+    
+    func swap(_ nums: inout [Int], _ i:Int, _ j:Int){
+        let item = nums[i]
+        nums[i] = nums[j]
+        nums[j] = item
+    }
+}
+
+PROBLEM 2 - Merge k sorted lists
+
+class Solution {
+    func mergeKLists(_ lists: [ListNode?]) -> ListNode? {
+        //base checks
+        var input = lists
+        if(input.count == 0) {
+            return nil
+        }
+        if(input.count == 1) {
+            return input[0]
+        }
+        
+        return partition(lists,0,input.count - 1)
+    }
+    
+    
+    func partition(_ list:[ListNode?], _ start:Int, _ end:Int) -> ListNode?{
+        if(start == end) {
+            return list[start]
+        }
+        if(start < end) {
+            let middle = (start + end)/2
+            let l1 = partition(list, start,middle)
+            let l2 = partition(list, middle + 1,end)
+            return mergeTwoList(l1,l2)
+        }
+        return nil
+    }
+    
+    func mergeTwoList(_ l1:ListNode?, _ l2:ListNode?) ->ListNode? {
+        if(l1 == nil) {return l2}
+        if(l2 == nil) {return l1}
+        var result:ListNode?
+        
+        if(l1!.val <= l2!.val) {
+            result = l1
+            result!.next = mergeTwoList(l1!.next,l2)
+        }
+        else {
+            result = l2
+            result!.next = mergeTwoList(l1,l2!.next)
+        }
+        return result
+    }
+}
+
+
