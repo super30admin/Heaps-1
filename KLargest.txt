@@ -1,0 +1,28 @@
+// Time Complexity :O(n logk) n- length of nums, k - number of provided k
+// Space Complexity : O(k) k - k largest element
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+       /* edge case */
+       if( nums == null || nums.length == 0)
+           return -1;
+       
+        /* priority queue to handle numbers */
+       PriorityQueue<Integer> q  = new PriorityQueue<>((a,b) -> a-b);
+        
+        /* iterating over the items of array */
+        for(int i:nums)
+        {
+            /* add it to pq */
+            q.offer(i);
+            /* if pq size greater than k then remove the top element from pq*/
+            if(q.size() > k)
+                q.remove();
+            
+        }
+        /* return peek element */
+        return q.peek();
+    }
+}

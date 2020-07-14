@@ -1,0 +1,52 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+
+// Time Complexity :O(n logk) n- number of nodes, k - is number of list
+// Space Complexity : O(n) n - number of final nodes
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        /* edge case */
+        if (lists == null) 
+            return null;
+        
+        /* node with value less is put first in pq */
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(new Comparator<ListNode>(){
+            public int compare(ListNode a,ListNode b){
+                return a.val - b.val;
+            }
+        });
+        
+        /* add first of all list */
+        for(ListNode n:lists)
+           if(n!=null) pq.add(n);
+        
+        /* new node to create new LL */
+        ListNode c = new ListNode(0), r = c;
+        
+        /* till priority queue is empty */
+        while(!pq.isEmpty()){
+            
+            /* poll out node from pq */
+            ListNode m = pq.poll();
+            
+            /* add it to the next of new LL */
+            r.next = new ListNode(m.val);
+            r = r.next;
+            
+            ./* if poll out node has next element then add it  to pq */
+            if(m.next != null) pq.add(m.next);
+        }
+        
+        // return head next of new LL node
+        return c.next;
+    }
+}
