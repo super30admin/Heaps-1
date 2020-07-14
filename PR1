@@ -1,0 +1,47 @@
+ // Time Complexity : O(nlogk) - n is the number of elements in the array and logk for heapify.
+// Space Complexity :O(K)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach: Using a min heap with the help of priority queue, maintaining a stack of size k underneath which will give out the Kth largest element.
+
+ class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        //min heap(a,b)->a-b
+        //max heap - b-a
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+        for(int i=0;i<nums.length;i++) {
+            pq.add(nums[i]);
+            if(pq.size()>k){
+                pq.poll();
+            }
+        }
+        return pq.poll();
+    }
+}
+
+// Time Complexity : O(nlog(n-k)) - where n is the total number of elements in the array processed. log(n-k) for heapify.
+// Space Complexity : O(n-k) - is the space utilized to store n-k elements  where n is the total number of elements in the array processed.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach: Using a max Heap. Always check the element comming out of the max heap if it is lesser than the global min replace it. We will ultimately have the kth largest element. Effective on space for large values of k.
+
+
+ class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        //min heap(a,b)->a-b
+        //max heap - b-a
+        PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+        int n=nums.length;
+        int[] arr=new int[k];
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<nums.length;i++) {//nlog(n-k)
+            pq.add(nums[i]);
+            if(pq.size()> n-k){
+                int c=pq.poll();
+               if(min>c)
+                   min=c;
+            }
+        }
+        return min;
+    }
+}

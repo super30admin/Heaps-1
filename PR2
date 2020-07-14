@@ -1,0 +1,92 @@
+// Time Complexity : O(nklogk) - where n is the number of nodes in the sorted list, k is the number of sorted lists and logk for heapify.
+// Space Complexity :O(k) - k is the number of sorted lists, used by the priority queue.
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :Yes. Had a problem putting my solution into code.
+// Your code here along with comments explaining your approach: Using a Priority Queue, Add all the list heads to the min heap. When we add a min by polling it out move the list to it's next if the next is not null and add the new list head to the priority queue.
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+/* Heap Solution*/
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+       if(lists==null || lists.length==0) return null;
+       ListNode result= new ListNode(-1);
+       ListNode curr=result;
+       PriorityQueue<ListNode> pq=new PriorityQueue<>((a,b)->a.val-b.val);
+       for(ListNode head: lists){
+           if(head!=null){
+             pq.add(head);  
+           }
+           }
+     while(!pq.isEmpty()){
+               ListNode min= pq.poll();
+               curr.next=min;
+               if(min.next!=null){
+                   min=min.next;
+                   pq.add(min);
+               }
+         curr=curr.next;
+    }
+        return result.next;
+}
+}
+
+
+
+
+// Time Complexity : O(n*k*k)- where n is the number of nodes in the sorted list, k is the number of lists and an extra k for travesing through the extra elements while merging.
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : Yes, At first I didn't understand why i need to use a MIN_VALUE while creating a result node. But when I ran into problems is when I understood why I need to change the initial value of the dummy node to Integer.MIN_VALUE.
+// Your code here along with comments explaining your approach: Merging the eah of the nodes to a main result node. Brute force approach.
+
+
+
+
+
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+       if(lists==null || lists.length==0) return null;
+       ListNode result= new ListNode(Integer.MIN_VALUE);
+       ListNode curr=result;
+       for(ListNode head: lists){
+          curr=merge(head,curr);
+    }
+        return result.next;
+}
+    public ListNode merge(ListNode l1,ListNode l2){
+        if(l1==null) return l2;
+        if(l2==null) return l1;
+        ListNode curr=new ListNode(-1);
+        ListNode result=curr;
+        while(l1!=null && l2!=null){
+            if(l1.val<l2.val){
+            curr.next=l1;
+            l1=l1.next;
+        }
+        else{
+            curr.next=l2;
+            l2=l2.next;
+        }
+        curr=curr.next;
+        }
+        if(l1==null){
+            curr.next=l2;
+        }
+        if(l2==null)
+        {
+            curr.next=l1;
+        }
+       return result.next; 
+    }
+}
