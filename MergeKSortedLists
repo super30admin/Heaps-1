@@ -1,0 +1,28 @@
+// Time complexity: NKlog(K) NK -> total number of elements from all the lists, K -> size of the heap (head of each list)
+// Space Complexity: O(K) K-> size of the priority queue
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0) return null;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
+        ListNode dummy = new ListNode(-1);
+        ListNode result = dummy;
+
+        for(ListNode head: lists){
+            if(head != null){
+                pq.add(head);
+            }
+        }
+
+        while(!pq.isEmpty()){
+            ListNode min = pq.poll();
+            dummy.next = min;
+            dummy = dummy.next;
+            if(min != null){
+                min = min.next;
+                pq.add(min);
+            }
+        }
+        return result.next;
+    }
+}
