@@ -26,7 +26,7 @@ class Solution {
 
 // Using Max Heap
 // Time Complexity - O(nlog(n-k))
-// Space Complexity - O(k)
+// Space Complexity - O(n-k)
 
 class Solution {
     public int findKthLargest(int[] nums, int k) {
