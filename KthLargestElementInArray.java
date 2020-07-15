@@ -1,3 +1,23 @@
+
+class Solution {
+        // Time Complexity : O(nlogn)  
+// Space Complexity : O(1)  
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :
+
+
+ // Your code here along with comments explaining your approach
+ /*
+ 1. Bruteforce - Sort and return kth index
+ */
+    public int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+        return nums[nums.length-k];
+    }
+}
+
+
+
 class Solution {
     // Time Complexity : O(nlogk)  n: nums and k: kth largest in nums
 // Space Complexity : O(k)  priority queue size
