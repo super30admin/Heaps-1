@@ -37,8 +37,8 @@ class Solution(object):
 #----------------------------------------------------------x-----------------------------------------------------------#
     # USING MAX HEAP with negative numbers
 
-    # Time Complexity : O(n*log(k)), where n is the length of the array
-    # Space Complexity : O(n), where k is given in the input
+    # Time Complexity : O(n*log(n)), where n is the length of the array
+    # Space Complexity : O(n)
     # Did this code successfully run on Leetcode : Yes
     # Any problem you faced while coding this : no
 
