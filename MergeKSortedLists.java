@@ -8,6 +8,9 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+//TC: nk log(k), n: average number of nodes in a linked list, k: number of linked lists
+//SC: O(k)
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         ListNode dummy = new ListNode(-1);
