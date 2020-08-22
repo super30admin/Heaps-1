@@ -1,0 +1,18 @@
+Approach 1 : Min Heap
+Time Complexity :nlogk
+Space Complexity : O(K) to store the elements in the heap
+I tried in Java as in python when i read it was all heapify function that does everything for us
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->a-b); // Min Heap
+        // Max heap (a,b)->b-a . Sort functiona for descending
+        for(int i=0; i<nums.length;i++){
+            pq.add(nums[i]);
+            if (pq.size()>k){ // This ensures PQ of size k always
+                pq.poll();
+            }
+        }
+        return pq.peek();
+        
+    }
+}
