@@ -1,0 +1,38 @@
+// Time: n+ k*logn ~ O(k*logn)
+// space: O(n)
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+         PriorityQueue<Integer> pq=new PriorityQueue<>((a,b) -> b-a);
+        for(int i=0;i<nums.length;i++)
+        {
+            pq.add(nums[i]);
+        }
+        System.out.println(pq);
+        for(int i=0;i<k-1;i++)
+        {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+// Time: k+ n*logk ~ O(n*logk)
+// space: O(k) 
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq=new PriorityQueue();
+        for(int i=0;i<k;i++)
+        {
+            pq.add(nums[i]);
+        }
+        System.out.println(pq);
+        for(int i=k;i<nums.length;i++)
+        {
+            if(nums[i]>pq.peek())
+            {
+                pq.poll();
+                pq.add(nums[i]);
+            }
+        }
+        return pq.peek();
+    }
+}
