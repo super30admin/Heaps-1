@@ -1,7 +1,7 @@
     /*  Explanation
     # Leetcode problem link : https://leetcode.com/problems/kth-largest-element-in-an-array/
     Time Complexity for operators : o(nlogk) ..
-    Extra Space Complexity for operators : o(n*logk) ... 
+    Extra Space Complexity for operators : o(n-k) ... to create heap. as soon  as size is greater we r removing it from help
     Did this code successfully run on Leetcode : Yes
     Any problem you faced while coding this : No
 # Your code here along with comments explaining your approach
