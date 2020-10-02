@@ -1,0 +1,21 @@
+// Time Complexity : O(n log k) n is the total number of elements, k is number of times the elements are arranged in the priority queue
+// Space Complexity : O(n) n is total number of elements stored in the queue
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int element=0;
+        
+        //priority queue for max heap
+        PriorityQueue<Integer> queue=new PriorityQueue<>((a,b)->b-a);
+        
+        //enter elements in queue i.e. max heap
+        for(int num:nums)   queue.offer(num);
+        
+        //poll elements one by one until we reach k
+        while(k-->0)    element=queue.poll();
+        
+        return element;
+    }
+}
