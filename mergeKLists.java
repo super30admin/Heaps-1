@@ -1,4 +1,4 @@
-// Time Complexity : O(n logk) + O(n logk) for insertion and deletion of elements from heap (since we are doing n times and the heap size is k)
+// Time Complexity : O(n logk) + O((n-k) logk) for insertion and deletion of elements from heap (since we are doing n times and the heap size is k)
 // where n is the number of total elements in all of the lists and k is the number of lists
 // Space Complexity : O(k) where k is the number of lists (the heap size is k)
 // Did this code successfully run on Leetcode : yes
