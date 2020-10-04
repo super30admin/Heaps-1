@@ -1,4 +1,4 @@
-// Time Complexity : O(n logk) + O(n logk) for insertion and deletion of elements from heap
+// Time Complexity : O(n logk) for insertion and deletion of elements from heap
 // Space Complexity : O(k)  (the heap size is fixed to k)
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this :
