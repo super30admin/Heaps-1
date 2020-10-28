@@ -1,5 +1,5 @@
-// Time Complexity: O(N log(N))
-// Space Complexity: O(N)
+// Time Complexity: O(N log(K))
+// Space Complexity: O(K)
 // Passed Leetcode
 import java.util.*;
 class Solution {
@@ -8,13 +8,18 @@ class Solution {
         
         for (int i = 0; i < nums.length; i++) {
             
-            minHeap.add(-nums[i]);
+            if (minHeap.size() < k) {
+                minHeap.add(nums[i]);
+            } else {
+                if (nums[i] > minHeap.peek()) {
+                    minHeap.remove();
+                    minHeap.add(nums[i]);
+                }
+            }
             
         }
         
-        for (int i = 0; i < k - 1; i++) {
-            minHeap.remove();
-        }
-        return -minHeap.remove();
+        
+        return minHeap.remove();
     }
 }
