@@ -1,0 +1,18 @@
+# Time Complexity: O(nlog(len(nums)-k))
+# Space Complexity: O(n)
+# Did this code successfully run on LeetCode: Yes
+
+# Three line Explanation:
+# 1. Heapify the input array
+# 2. Iteration: Pop the heap len(nums)-k times
+# 3. Return when iteration done
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        heapq.heapify(nums)
+        count = 0
+        k = len(nums) - k
+        while count <= k:
+            count += 1
+            ans = heapq.heappop(nums)
+        return ans
