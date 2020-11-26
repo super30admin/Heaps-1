@@ -1,0 +1,26 @@
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Did this code successfully run on LeetCode: Yes
+
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        if lists is None or len(lists) == 0:
+            return None
+        heap = []
+        heapq.heapify(heap)
+        something = True
+        while something:
+            something = False
+            for i in range(len(lists)):
+                if lists[i] is not None:
+                    something = True
+                    heapq.heappush(heap, (lists[i].val))
+                    lists[i] = lists[i].next
+        if len(heap) == 0:
+            return None
+        head = ListNode(heapq.heappop(heap))
+        cur = head
+        while heap:
+            cur.next = ListNode(heapq.heappop(heap))
+            cur = cur.next
+        return head
