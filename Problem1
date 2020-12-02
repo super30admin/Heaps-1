@@ -1,0 +1,27 @@
+class Problem1 {
+    public int findKthLargest(int[] nums, int k) {
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(k, new Comparator<Integer>(){
+            public int compare(Integer n1, Integer n2){
+                return n1-n2;
+            }});
+        
+        for(int num : nums){
+            if(pq.size() < k){
+                pq.add(num);
+            }
+            else{
+                if(pq.peek() < num){
+                    pq.poll();
+                    pq.add(num);
+                }
+            }
+        
+        }
+        return pq.peek(); 
+    }
+}
+
+// Time complexity O(Nlog(k))
+//Space Complexity O(k)
+// Tested in Leetcode
