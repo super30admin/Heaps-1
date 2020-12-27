@@ -13,7 +13,7 @@ class use_only_first:
         self._first, self._second = first, second
 
     def __lt__(self, other):
-        return self._first < other._first
+        return self._first < other._first  # other--another instance
 
 
 class Solution:
@@ -37,7 +37,7 @@ class Solution:
         from heapq import heappush
         from heapq import heappop
         heap = []
-        ListNode.__lt__ = lambda x, y: x.val < y.val
+        ListNode.__lt__ = lambda x, y: x.val < y.val  ##to compare the nodes for priority queue
         head = temp = ListNode(0)
         for l in lists:
             if l:
