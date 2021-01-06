@@ -1,0 +1,34 @@
+//TC: O(N*logk)
+//SC: O(K) ?? -> Max size of heap when all heads added 
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists==null){
+            return null;
+        }
+        
+        //Using dummy pointer to build/traverse final merged list
+        ListNode dummy = new ListNode();
+        ListNode result = dummy;
+        //CREATING MIN. HEAP for all heads in lists
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((ListNode a, ListNode b) -> a.val - b.val);
+        
+        //Add all heads into priorityQueue
+        for(ListNode head : lists){
+            if(head!=null){
+                pq.add(head);
+            }
+        }
+        //Start picking MIN element from priorityQueue and add it's next element in priorityQueue
+        while(!pq.isEmpty()){
+            ListNode current = pq.poll();
+             dummy.next = current;
+                if(current.next!=null){     //moving to next value in selected node list
+                    pq.add(current.next);
+                }
+            dummy = dummy.next;
+        }
+
+        return result.next;
+    }
+}
