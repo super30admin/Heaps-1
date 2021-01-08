@@ -1,4 +1,4 @@
-// Time - O(KlgK)
+// Time - O(NlgK)
 // Space - O(k)
 
 class Solution {
