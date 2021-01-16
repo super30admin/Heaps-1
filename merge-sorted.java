@@ -1,4 +1,33 @@
-// Brute Force, Time - O(kn^2), O(1)
+// Heap - Time - O(klogk + nklogk), Space - O(k)
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null) {
+            return null;
+        }
+        
+        PriorityQueue<ListNode> q = new PriorityQueue<>((a, b) -> a.val - b.val);
+        
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        ListNode result = dummy;
+        int k = lists.length;
+        for(ListNode list : lists) {
+            if(list!=null) {    
+                q.add(list);
+            }
+        }
+        
+        while(!q.isEmpty()) {
+            ListNode curr = q.poll();
+            dummy.next = curr;
+            if(curr.next!=null) {
+                q.add(curr.next);
+            }
+            dummy = dummy.next;
+        }
+        return result.next;
+    }
+}
+// Brute Force, Time - O(nk^2), O(1)
 
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
