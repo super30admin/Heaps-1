@@ -1,0 +1,19 @@
+//Time Complexity: O(nlogk) n is no of element, k is distinct nums 
+//Space Complexity: O(k)
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        
+        if(nums == null || nums.length == 0 ) return -1;
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i =0; i<nums.length;i++){
+            //keep adding elements to queue
+            pq.add(nums[i]);
+            //k size of minHeap
+            if(pq.size() > k)
+                pq.poll();
+        }
+        //kth element will be minimum 
+        return pq.peek();
+    }
+}
