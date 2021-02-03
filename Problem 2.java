@@ -42,3 +42,63 @@ class Solution {
         return result.next;
     }
 }
+
+
+//Time Complexity: O(Nk^2) where N is the average length of the lists and k is the number of lists
+//Space Complexity: O(NK)
+
+//Successfully runs on leetcode: 137 ms
+
+//Approach: Firstly, we are comparing the nodes of any two lists, merging them and comparding the merged result with 
+//the next list and so on
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode result = new ListNode(Integer.MIN_VALUE);
+        for(ListNode list: lists)
+        {
+            result = merge(result,list);
+        }
+        return result.next;
+    }
+    
+    private ListNode merge(ListNode l1, ListNode l2)
+    {
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        ListNode res = dummy;
+        int min = Integer.MAX_VALUE;
+        while(l1 != null && l2 != null)
+        {
+            if(l1.val < l2.val)
+            {
+                dummy.next = l1;
+                l1 = l1.next;
+            }
+            else
+            {
+                dummy.next = l2;
+                l2 = l2.next;
+            }
+            dummy = dummy.next;    
+        }
+        
+        if(l1 != null)
+            dummy.next = l1;
+        if(l2 != null)
+            dummy.next = l2;
+        
+        return res.next;
+    }
+}
+
