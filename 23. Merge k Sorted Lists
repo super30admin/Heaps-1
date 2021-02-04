@@ -1,0 +1,48 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+import heapq
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        # initialize heapq
+        queue = []
+        # push all the head nodes of each linked list along with their indexes into the queue
+        for i in range(len(lists)):
+            if(lists[i]):
+                queue.append((lists[i].val,i));
+        heapq.heapify(queue);
+        #print(queue)
+        newhead = None
+        last = None;
+        # iterate until the queue is empty
+        while(queue):
+            # returns the minimum valued node and the corresponding sub linked list index
+            value, idx = heapq.heappop(queue);
+            # create a newnode or attac to the already existing new linkedlist
+            if(not newhead):
+                newhead = ListNode(value);
+                last = newhead;
+            else:
+                newnode = ListNode(value);
+                last.next = newnode;
+                last = newnode;
+            
+            # move the pointer to the next in the corresponding index sublinked list
+            lists[idx] = lists[idx].next;
+            
+            # push the next node if it is not None of that corresponding index
+            if(lists[idx]):
+                heapq.heappush(queue, (lists[idx].val, idx));
+        return newhead;
+    
+    '''
+    n = sum of the lengths of all the linked lists
+    k = number of sublinkedlist
+    time complexity = O(nlogk)
+    space complexity = O(k)
+    '''
+                
+        
+        
