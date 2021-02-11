@@ -1,17 +1,51 @@
-public class Solution {
-    public ListNode mergeKLists(List<ListNode> lists) {
-        Queue<ListNode> heap = new PriorityQueue(new Comparator<ListNode>(){
-            @Override public int compare(ListNode l1, ListNode l2) { 
-                return l1.val - l2.val; 
+//Time complexity: O(kN), where k is number of linked lists
+//Space complexity: O(1) 
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode h = new ListNode(0);
+        ListNode ans=h;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                h.next = l1;
+                h = h.next;
+                l1 = l1.next;
+            } else {
+                h.next = l2;
+                h = h.next;
+                l2 = l2.next;
             }
-        });
-        ListNode head = new ListNode(0), tail = head;
-        for (ListNode node : lists) if (node != null) heap.offer(node);
-        while (!heap.isEmpty()) {
-            tail.next = heap.poll();
-            tail = tail.next;
-            if (tail.next != null) heap.offer(tail.next);
         }
-        return head.next;
+        if(l1==null){
+            h.next=l2;
+        }
+        if(l2==null){
+            h.next=l1;
+        } 
+        return ans.next;
+    }
+    
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length==1){
+            return lists[0];
+        }
+        if(lists.length==0){
+            return null;
+        }
+        ListNode head = mergeTwoLists(lists[0],lists[1]);
+        for (int i = 2; i < lists.length; i++) {
+            head = mergeTwoLists(head,lists[i]);
+        }
+        return head;
     }
 }
