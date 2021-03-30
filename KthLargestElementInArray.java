@@ -1,6 +1,6 @@
 class KthLargestElementInArray {
     
-    // Time Complexity: O(n)
+    // Time Complexity: O(nlogk)
     // Space Complexity: O(k)
     
     public int findKthLargest(int[] nums, int k) {
