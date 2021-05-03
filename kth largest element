@@ -1,0 +1,45 @@
+// Time Complexity : minHeap - O(n log k) maxHeap - O(n Log(n-k))
+// Space Complexity : minHeap - O(k) maxHeap - O(n-k)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :
+
+
+// Your code here along with comments explaining your approach
+maxHeap heap size n-k 
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if(nums == null || nums.length == 0)
+            return -1;
+       
+        PriorityQueue<Integer> maxHeap  = new PriorityQueue<>((a,b) -> b-a);
+        int heapSize = nums.length - k;
+        int min = Integer.MAX_VALUE;
+        for(int num : nums)
+        {
+            maxHeap.add(num);
+            if(maxHeap.size() > heapSize)
+            {
+                min = Math.min(min, maxHeap.poll());
+            }
+        }
+        return min;
+    }
+}
+minHeap heap size - k
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if(nums == null || nums.length == 0)
+            return -1;
+       
+        PriorityQueue<Integer> minHeap  = new PriorityQueue<>();
+        for(int num : nums)
+        {
+            minHeap.add(num);
+            if(minHeap.size() > k)
+            {
+                minHeap.poll();
+            }
+        }
+        return minHeap.peek();
+    }
+}
