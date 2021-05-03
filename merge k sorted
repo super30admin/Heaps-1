@@ -1,0 +1,50 @@
+// Time Complexity : O(nk log k) where n is avg length of linked lists
+// Space Complexity : O(k) min heap will have k elements
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this :
+null pointer when head is null
+
+// Your code here along with comments explaining your approach
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        //check input
+        if(lists == null || lists.length == 0)
+            return null;
+        
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b) -> a.val - b.val);
+        
+        ListNode result = new ListNode();
+        ListNode curr = result;
+        
+        for(ListNode head : lists)
+        {
+            if(head != null)
+                pq.add(head);
+            
+        }
+        
+        while(!pq.isEmpty())
+        {
+            ListNode min = pq.poll();
+          
+            if(min.next != null)
+                pq.add(min.next);
+            
+              curr.next = min;
+              curr = curr.next;
+        }
+        
+        return result.next;
+            
+    }
+}
