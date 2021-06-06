@@ -1,3 +1,6 @@
+# TC: O(Nk) where N is avg length of each list and merging them takes N.k time.
+# SC: O(1) since we do not use any extra space.
+
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         def merge(l1, l2): 
