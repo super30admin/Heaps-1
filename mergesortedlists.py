@@ -41,3 +41,26 @@ class Solution:
         return result.next
     
     
+# Aternative Solution:
+
+class Solution:
+    from heapq import heappush, heappop
+    from typing import List
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        minHeap = []
+        head = None
+                
+        for item in lists:
+            while item != None:
+                heappush(minHeap, item.val)
+                item = item.next
+            
+        if len(minHeap) > 0:
+            head = ListNode(heappop(minHeap))
+            node = head
+            
+        while minHeap:
+            node.next = ListNode(heappop(minHeap))
+            node = node.next
+            
+        return head
