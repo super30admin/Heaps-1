@@ -9,6 +9,8 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+//Time : O(nlogk)
+//SPace : O(n)
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
