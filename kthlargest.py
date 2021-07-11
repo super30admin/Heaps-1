@@ -20,3 +20,25 @@ class Solution:
                 #print(result)
 
         return result[0]
+
+#kth smallest
+import heapq
+class Solution:
+    def kthSmallest(self,arr, l, r, k):
+        '''
+        arr : given array
+        l : starting index of the array i.e 0
+        r : ending index of the array i.e size-1
+        k : find kth smallest element and return using this function
+        '''
+        
+        result = [] 
+        #maxheap - to store in maxheap negate the value when inserting 
+        
+        for i in range(len(arr)):
+            heapq.heappush(result,-1*arr[i])
+            if len(result)>k:
+                heapq.heappop(result)
+                
+        #-1*result since val negated during insertion
+        return -1*result[0]
