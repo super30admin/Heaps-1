@@ -1,0 +1,31 @@
+//time : O(nlog k)
+//Space : O(k)
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0)
+            return null;
+        
+        PriorityQueue<ListNode> pqueue = new PriorityQueue<>((a,b)->(a.val-b.val));
+        ListNode curr = new ListNode(Integer.MIN_VALUE), dummy =curr;
+        for(ListNode head : lists)
+        {
+            if(head!=null)
+            pqueue.add(head);
+        }
+        
+        while(!pqueue.isEmpty())
+        {
+            ListNode min = pqueue.poll();
+            dummy.next =min;
+            dummy = dummy.next;
+            
+            if(min.next!=null)
+            {
+                pqueue.add(min.next);
+            }
+        }
+        return curr.next;
+        
+    }
+}
