@@ -1,4 +1,4 @@
-// Time Complexity : O(N log K)
+// Time Complexity : O(Nk log K)
 // Space Complexity : O(K)
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this :no
@@ -17,7 +17,7 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        
+
         if(lists == null || lists.length == 0)
             return null;
         
