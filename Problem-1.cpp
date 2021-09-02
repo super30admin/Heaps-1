@@ -3,6 +3,7 @@ Min Heap Approach
 Time Complexity = O(NLog k)
 Space Complexity = O(K)
 where N is the number of elements in the array and k is the height of the heap.
+log k is the time complexity coming due to the heapify of new element. i.e- when we arrange the new element in the heap such that it follows the Min heap property.
 */
 class Solution {
 public:
