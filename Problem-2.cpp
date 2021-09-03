@@ -9,6 +9,8 @@
  * };
  Time Complexity = O(NK*LogK)
  Space Complexity = O(k)
+ where k is the number of lists and we are only inserting one element from each list at a time(after removal of one node from queue we add its next to the queue ) then the Space complexity is O(k). 
+ And also we are traversing NK i.e- N is the average elements in one list, and insertion of node in heap takes logK time. This is how we get Time Complexity od O(NK*Logk).
  */
 class Solution {
 public:
