@@ -1,0 +1,18 @@
+Did it run on Leetcode: yes
+Time Complexity: O(nlog(n))
+Space Complexity: O(1)
+
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        before=0
+        after=0
+        length=len(nums)
+        #maps={}
+        nums=sorted(nums)
+        
+        return nums[length-k]
