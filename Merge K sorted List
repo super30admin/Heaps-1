@@ -1,0 +1,41 @@
+
+time complexity: O(nlogk)
+Spacek Complexity: o(k)
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    struct cmp{
+        bool operator()(ListNode*L1,ListNode*L2) {
+            return (L1->val>L2->val);
+        }
+    };
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+         priority_queue<ListNode*,vector<ListNode*>,cmp> pq;
+        for(int i = 0;i<lists.size();i++) {
+            if(lists[i]!=NULL) {
+            pq.push(lists[i]);
+            }
+        }
+        ListNode* temp,*head;
+        temp = head = new ListNode(-1);
+        while(!pq.empty()) {
+            ListNode* min = pq.top();
+            
+            pq.pop();
+            temp->next = min;
+            temp = temp->next;
+            if(min->next != NULL)pq.push(min->next);
+        }
+        
+        return head->next;
+    }
+};
