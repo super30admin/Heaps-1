@@ -1,0 +1,40 @@
+//Timecomplexity:- nlogk
+//spacecomplexity:-O(k) for k first nodes of linked list we are building heap.
+//Did it run on leetcode:- yes.
+//What problem did you face:- didn't get optimized idea.
+//Code with explanation is given below.
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+       PriorityQueue<ListNode> minheap=new PriorityQueue<>(new pqCompartor());//Priority queus works only on primitive                                                                                   //data types and as listNode is not                                                                                       //premitive type using comparator.
+        for(ListNode list:lists){
+            if(list!=null){
+                minheap.add(list);
+            }                                //adding elements to pq.
+        }
+        ListNode dummy=new ListNode(-1);
+        ListNode current=dummy; //As insertion happens at current.next;
+        while(!minheap.isEmpty()){
+            ListNode top=minheap.remove();//for removing root.
+            if(top.next!=null){
+                minheap.add(top.next);//after deletion.
+            }
+            current.next=top;
+            current=top;
+        }
+        return dummy.next;
+    }
+    public class pqCompartor implements Comparator<ListNode> {  //forcomparing of user defined objects.
+        public int compare(ListNode l1,ListNode l2){
+            if(l1.val>l2.val){
+                return 1;
+            }                         //selection of which element of linkedlist as min.
+            else if(l2.val>l1.val){   // 1 means l1 first value, -1 means l2 firstvalue,0 means anything ok.
+                return -1;
+            }
+            else{
+                return 0;
+            }
+        }
+    }
+}
