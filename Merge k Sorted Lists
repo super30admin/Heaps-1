@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+    
+    // Time Complxity --> O(nklog(k)) --> let n be the avg number of values per row, k be the number of rows.
+    // Space complexity --> O(k) --> At any point of time the maximum number of values stored in a queue is K. 
+public:
+class Compare
+    {
+public:
+    bool operator() (ListNode* a, ListNode* b)
+    {
+        return a->val > b->val;
+    }
+};
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        priority_queue<ListNode*, vector<ListNode*>,Compare> pq;
+        ListNode* dummy = new ListNode(-1);
+        ListNode* curr = dummy;
+        for(auto list : lists){
+          if(list != NULL){
+           pq.push(list);   
+          }    
+        }
+        
+        while(!pq.empty()){
+            ListNode* temp = pq.top();
+            pq.pop();
+            ListNode * n = new ListNode(temp->val);
+              curr->next = n;
+            curr = curr->next;
+            if(temp->next != NULL){
+                pq.push(temp->next);
+            }
+        }
+        return dummy->next;
+        
+    }
+};
