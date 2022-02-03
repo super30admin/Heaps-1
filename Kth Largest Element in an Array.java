@@ -4,7 +4,7 @@
 // Any problem you faced while coding this : No
 
 
-// Mininum Heap - minimum element is maintained at the top of the stack
+// Mininum Heap - smallest element is maintained at the top of the stack
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         
