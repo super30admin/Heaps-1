@@ -8,7 +8,7 @@
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         
-        PriorityQueue<Integer> pq = new PriorityQueue<>(); // by default comparator is for (a,b) -> (a,b)
+        PriorityQueue<Integer> pq = new PriorityQueue<>(); // by default comparator is for (a,b) -> a-b
         for(int n : nums){
             pq.add(n);
             // if heap size exceeds k
