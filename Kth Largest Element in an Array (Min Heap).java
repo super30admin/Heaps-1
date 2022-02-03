@@ -1,4 +1,4 @@
-// Time Complexity : O(nlog(k))
+// Time Complexity : O(nlog(k)) where k is provided as input
 // Space Complexity : O(1)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
