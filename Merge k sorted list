@@ -1,0 +1,39 @@
+//TC = O(nlogk)
+
+//Since here we are using priority queue therefore instead of list we are adding to queue. Initially add all the nodes to the queue and then merging it 
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        
+         Queue<ListNode> pq = new PriorityQueue<>(
+        (a,b) -> a.val - b.val
+        );
+       
+        ListNode dummyHead = new ListNode();
+        
+        ListNode tail = dummyHead;
+        
+        for(int i = 0; i<lists.length; i++){
+            
+            if(lists[i] != null){
+                pq.add(lists[i]);
+            }
+            
+        }
+        
+        while(!pq.isEmpty()){
+            
+            ListNode minNode = pq.remove();  // k -> logk
+            
+            if(minNode.next != null){
+                pq.add(minNode.next);  //since we are pushing again n again then going to next
+            }
+            
+            tail.next = minNode;
+            tail = minNode;
+        }
+
+        return dummyHead.next;
+        
+    }
+}
