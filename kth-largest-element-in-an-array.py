@@ -1,5 +1,7 @@
 '''
-- Time Complexity: O(N + klogN)
+- Time Complexity: O(N + klogN) 
+    N - Number of elements in nums array
+    k - nth largest to be found
 - Space Complexity: O(1) - takes k spaces
 - Works in Leetcode
 - 3 line explantion
