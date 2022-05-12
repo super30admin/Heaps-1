@@ -1,3 +1,10 @@
+// Time Complexity : O(n log k) k is number of linkedlists, n is total elements
+// Space Complexity : O(n) 
+// Did this code successfully run on Leetcode : no
+// Any problem you faced while coding this : no
+
+// Your code here along with comments explaining your approach: min adding first elements to the pq, then iterating through the linked lists of smallest elem in heap
+
 import java.util.PriorityQueue;
 
 public class MergeKSortedLists {
