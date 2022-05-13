@@ -2,8 +2,8 @@
 class KthLargestElementInAnArray {
     /*
      *
-     * Time Complexity - O(n) to traverse over the entire list and store the elements to max heap/ priority queue
-     * Space Complexity - O(n) to store all elements in priority queue/ heap
+     * Time Complexity - O(n log(k)) because one insertion requires log k time and total n insertions
+     * Space Complexity - O(k) to store all elements in priority queue/ heap
      *
      */
 
