@@ -58,12 +58,6 @@ class ListNode:
         self.val = val
         self.next = next
 
-    def __repr__(self):
-        return f'Node value: {self.val}'
-
-    def __lt__(self, other):
-        return self.val < other.val
-
 
 class Solution:
     """
@@ -78,23 +72,28 @@ class Solution:
     """
 
     def mergeKLists1(self, lists):
+        # override '<' operator of listnode so heap can perform heapify on this comparision
+        lessThan = lambda x, y: x.val < y.val
+        ListNode.__lt__ = lessThan
+
         hp = []
         # put head of each LL in min heap
         for ll in lists:
-            if ll:
+            if ll is not None:
                 hpush(hp, ll)
 
         # dummy node
         result = ListNode(-1)
+        curr = result
         while hp:
             # pop the minimum element from heap and add it's next to heap and go to it's next
             minNode = hpop(hp)
-            result.next = minNode
+            curr.next = minNode
             minNode = minNode.next
             if minNode:
                 hpush(hp, minNode)
 
-            result = result.next
+            curr = curr.next
 
         return result.next
 
