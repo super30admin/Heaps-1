@@ -75,7 +75,17 @@ class Solution {
     }
 }
 
-//****MERGE K-SORTED LISTS****
+//****MERGE K-SORTED LISTS- bruteforce****
+//Add all the lists into single list, now sort the merged list
+//Time complexity: o(nlogn);
+
+
+//****MERGE K-SORTED LISTS- optimization****
+//Using 2 pointers, merge the 2 list as result now compare result and 3rd list and make the final list
+//Time complexity: o(nk);
+
+
+//****MERGE K-SORTED LISTS-using heaps****
 //Time complexity:nlogk where n is the total nodes and logk is of insertion of k nodes at particular time in the heap.
 //Space complexity:0(k)
 //Leetcode runnable:Y
