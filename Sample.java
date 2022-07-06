@@ -49,3 +49,28 @@ class Solution {
         return result;
     }
 }
+
+//****Kth LARGEST ELEMENT IN ARRAY USING MAX HEAP****
+//KEEP SIZE OF HEAP N-K+1
+//Time complexity:nlog(n-k) where n is the size of array and k is the size of heap
+//Space complexity:0(n-k);
+//Leetcode runnable: Y;
+//Any doubts: No;
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+        int n=nums.length;
+        //Iterate through array and add elements to heap
+        for(int num:nums)
+        {
+            pq.add(num);
+            
+            if(pq.size()>n-k+1)
+            {
+                pq.poll();
+            }
+        }
+        return pq.poll();
+    }
+}
