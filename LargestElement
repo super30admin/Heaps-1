@@ -1,0 +1,16 @@
+//TC - O(n * log(n - k))
+//SC - O(n - k)
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int n = nums.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int result = Integer.MAX_VALUE;
+        for(int num:nums){
+            pq.add(num);
+            if(pq.size() > (n - k)){
+                result = Math.min(result , pq.poll());
+            }
+        }
+        return result;
+    }
+}
