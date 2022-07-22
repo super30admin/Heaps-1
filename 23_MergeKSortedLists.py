@@ -61,9 +61,10 @@ class ListNode:
 
 class Solution:
     """
-    Ideation-Min heap, TC- O(N * logK(for heapify in heap)), SC- O(K)
+    Ideation-N pointer merge using Min heap, TC- O(N * logK(for heapify in heap)), SC- O(K)
 
-    Put the element in min heap one by one and keep popping and adding to the our merged list and replace it with its
+    
+    Put the element in min heap one by one and keep popping and adding to the merged list and replace it with its
     next element.
     In other words, put the heads of all linked list in min heap, pop the minimum and go to it's next, repeat.
 
@@ -71,7 +72,7 @@ class Solution:
     heap. When the heap is empty, our algo will terminate
     """
 
-    def mergeKLists1(self, lists):
+    def mergeKLists(self, lists):
         # override '<' operator of listnode so heap can perform heapify on this comparision
         lessThan = lambda x, y: x.val < y.val
         ListNode.__lt__ = lessThan
