@@ -1,3 +1,5 @@
+//TC - O(Nlogk).   k -> no of lists. . N total no of nodes
+//SC - O(k)
 /**
  * Definition for singly-linked list.
  * public class ListNode {
