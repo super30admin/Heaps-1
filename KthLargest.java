@@ -1,4 +1,4 @@
-//TC - O(nlogk)
+//TC - O(nlogk).  n-> length of nums
 //SC - O(1);
 
 class Solution {
