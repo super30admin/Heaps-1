@@ -1,3 +1,6 @@
+//TC - O(nlogk)
+//SC - O(1);
+
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         k=k-1;
