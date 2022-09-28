@@ -1,0 +1,22 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        temp = last = ListNode()
+        nums = [(first.val, i) for i, first in enumerate(lists) if first]
+        heapify(nums)
+        while nums:
+            _, i = heappop(nums)
+            last.next = lists[i]
+            last = last.next
+            lists[i] = lists[i].next
+            if lists[i]:
+                heappush(nums, (lists[i].val, i))
+        return temp.next
+    
+# Time Compexity: O(nlogk)
+# Space Complexity: O(k)
+# Successfully implemented on Leetcode
