@@ -1,0 +1,20 @@
+What is heap?
+Heap is the data structure which is basically a complete binary tree. On the basis of how the data is stored heap can be categorized as min heap or max heap. 
+
+It has following basic functions:
+parent: i-1 // 2 where i is the index of element whose parent needs to be find.
+left child: 2i + 1 where i is the index of element whose left child needs to be find.
+right child: 2i + 2 where i is the index of element whose right child needs to be find.
+leafNode: for n size heap, leaf nodes are at index i > n/2
+add(): add element to the heap
+remove(): remove element from the heap
+heapify(): heap is generally implemented using array, heapify() is use to arranged the array elements in such a way that it will satisfy the heap data structure's criteria.
+
+Min Heap:
+parent < child and root node has the minimum value
+
+Max Heap:
+parent > child and root node has the maximum value
+
+When to use heap:
+Whenver we need to find the kth largest element or kth smallest element, then heap is useful.
