@@ -1,0 +1,33 @@
+//TimeComplexity nlogn
+//SpaceComplexity O(n)
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null )return null;
+        ListNode result = new ListNode(0);
+        ListNode merge = result;
+        
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a,b) -> (a.val - b.val));
+        
+        for(ListNode l : lists){
+            if(l != null)
+            minHeap.add(l);            
+        }
+        
+        while(!minHeap.isEmpty()){
+            
+        ListNode curr = minHeap.poll();
+            
+            
+        if(curr.next != null){
+            minHeap.add(curr.next);
+            
+        }
+        result.next = new ListNode(curr.val);
+        result = result.next;
+        
+        }
+        
+       return merge.next; 
+    }
+}
