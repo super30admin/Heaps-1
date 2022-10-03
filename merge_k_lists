@@ -1,4 +1,4 @@
-//TimeComplexity nlogn
+//TimeComplexity nlogk
 //SpaceComplexity O(n)
 
 class Solution {
