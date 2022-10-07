@@ -1,0 +1,49 @@
+#Kth Largest Element in an Array
+#tc:O(n)
+#sc:O(n)
+class Solution:
+    def findKthLargest(self, nums, k):
+        if not nums: return
+        pivot = random.choice(nums)
+        left =  [x for x in nums if x > pivot]
+        mid  =  [x for x in nums if x == pivot]
+        right = [x for x in nums if x < pivot]
+        
+        L, M = len(left), len(mid)
+        
+        if k <= L:
+            return self.findKthLargest(left, k)
+        elif k > L + M:
+            return self.findKthLargest(right, k - L - M)
+        else:
+            return mid[0]
+            
+ #Merge k Sorted Lists
+ #tc:O(nlogn)
+#sc:O(nlogn)
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        
+        
+        def merge(l, r):
+            if not l:
+                return r
+            if not r:
+                return l
+            if l.val < r.val:
+                l.next = merge(l.next, r)
+                return l
+            else:
+                r.next = merge(r.next, l)
+                return r
+            
+        if not lists:
+            return None
+        if len(lists) == 1:
+            return lists[0]
+        else:
+            mid = len(lists) // 2
+            l = self.mergeKLists(lists[:mid])
+            r = self.mergeKLists(lists[mid:])
+            return merge(l, r)
+			
