@@ -1,0 +1,45 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        // This comparator will be used to build MIN HEAP.
+        // We use a LAMBDA to define the comparator.
+        auto comp = [&](ListNode *a, ListNode *b) {
+            return a->val > b->val;
+        };
+
+        // This priority queue is our MIN HEAP
+        priority_queue<ListNode *, vector<ListNode *>, decltype(comp)> pq(comp);
+        
+        for(auto it : lists){
+            if(it != NULL){
+            pq.push(it);
+            }
+        }
+        
+        ListNode* dummy = new ListNode(-1);
+        ListNode* curr = dummy;
+        while(!pq.empty()){
+            ListNode* min = pq.top();
+            pq.pop();
+            if(min->next != NULL){
+            pq.push(min->next);
+            }
+            curr->next = min;
+            curr = curr->next;
+        }
+        
+       return dummy->next; 
+    }
+};
+
+    
