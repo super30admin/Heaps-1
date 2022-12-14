@@ -1,5 +1,13 @@
-// Time Complexity : nkO(logk) where k is size of  min-heap
+// n is avg list size, k is number of lists
+
+// using priority queue
+// Time Complexity : O(nklogk) where k is size of min-heap
 // Space Complexity : O(k) i.e. size of min-heap
+
+// using two pointers
+// Time Complexity : O(nk*k) merging list of size nk k times
+// Space Complexity : O(nk) i.e. size of merged list
+
 // Did this code successfully run on Leetcode : yes
 
 
@@ -16,7 +24,9 @@ class ListNode {
 }
 
 public class MergeKSortedLists {
-    public ListNode mergeKLists(ListNode[] lists) {
+
+    //using priority queue
+    public ListNode mergeKListsPriorityQueue(ListNode[] lists) {
         if(lists == null || lists.length == 0){
             return null;
         }
@@ -42,6 +52,48 @@ public class MergeKSortedLists {
                 }
                 curr = curr.next;
             }
+        }
+
+        return dummy.next;
+    }
+
+
+    //using two pointers
+    public ListNode mergeKListsTwoPointers(ListNode[] lists) {
+        if(lists == null || lists.length == 0){
+            return null;
+        }
+
+        ListNode merged = new ListNode(Integer.MIN_VALUE);
+        for(ListNode list: lists){
+            merged = merge(merged, list);
+        }
+
+        return merged.next;
+
+    }
+
+    private ListNode merge(ListNode l1, ListNode l2){
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        ListNode curr = dummy;
+
+        while(l1 != null && l2 != null){
+            if(l1.val < l2.val){
+                curr.next = l1;
+                l1 = l1.next;
+            }else{
+                curr.next = l2;
+                l2 = l2.next;
+            }
+            curr = curr.next;
+        }
+
+        if(l1 != null){
+            curr.next = l1;
+        }
+
+        if(l2 != null){
+            curr.next = l2;
         }
 
         return dummy.next;
