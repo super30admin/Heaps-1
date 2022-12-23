@@ -1,0 +1,47 @@
+// Time Complexity : O(n*log(k)) : n is total number of elements and k is number of lists;
+// Space Complexity : O(k)
+// Did this code successfully run on Leetcode : Y
+// Any problem you faced while coding this : N
+
+// Your code here along with comments explaining your approach in three sentences only
+//created a min heap of size = number of lists and then we are removing the heap value, replacing it 
+// it with the next value of its list if exists otherwise moving on to the next min value 
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0) return null;
+
+        ListNode dummy  = new ListNode(-1);
+        ListNode curr = dummy;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b)->(a.val - b.val));
+
+        for(ListNode list : lists){
+            if(list!=null){
+                pq.add(list);
+            }
+        }
+
+        while(!pq.isEmpty()){
+            ListNode min = pq.poll();
+            curr.next = min;
+            if(min.next != null ){
+                pq.add(min.next);
+            }
+            curr = curr.next;
+        }
+        return dummy.next;
+    }
+}
