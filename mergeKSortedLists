@@ -1,0 +1,43 @@
+// Time Complexity : O(n log k) where n is the total number of nodes in final list and k is the number of lists
+// Space Complexity : O(n) where n is the total number of nodes in final list
+// Did this code successfully run on Leetcode : Yes
+// Three line explanation of solution in plain english
+/*
+ * Add all lists to a min heap sorted by head val
+ * pop the least element, add to result and add the next back to the queue 
+ */
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length == 0) return null;
+        PriorityQueue<ListNode> q = new PriorityQueue<ListNode>((n1,n2)->n1.val-n2.val);
+        
+        //traverse through the lists and add all the head elements
+        for(int i = 0; i < lists.length; i++){
+            if(lists[i] != null) q.add(lists[i]);
+        }
+        //get the min and add its next 
+        if(q.isEmpty()) return null;
+        ListNode temp = q.poll();
+        ListNode result = new ListNode(temp.val,null);
+        ListNode curr = result;
+        if(temp.next != null) q.add(temp.next);
+        while(!q.isEmpty()){
+            temp = q.poll();
+            result.next = new ListNode(temp.val,null);
+            result = result.next;
+            if(temp.next != null) q.add(temp.next);
+        }
+        return curr;
+    }
+}
