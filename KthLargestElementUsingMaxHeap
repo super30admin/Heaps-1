@@ -1,0 +1,18 @@
+//time complexity : O(nlog(n-k))
+//space complexity: O(n-k)
+//using MaxHeap
+class KthLargestElementUsingMaxHeap {
+    public int findKthLargest(int[] nums, int k) {
+        //max heap
+        PriorityQueue<Integer> queue = new PriorityQueue<>((a,b)->b-a);
+        int result= Integer.MAX_VALUE;
+        int n = nums.length;
+        for(int num : nums){
+            queue.add(num);
+            if(queue.size()>n-k){
+               result= Math.min(result, queue.poll());
+            }
+        }
+        return result;
+    }
+}
