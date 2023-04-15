@@ -1,0 +1,26 @@
+//using priority queue
+ //time complexity: O(nklogk)== O(Nlogk)
+ //space complexity : O(N)== O(nk)
+class MergekSortedListsUsingPriorityQueue {
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> queue = new PriorityQueue<>((a,b)-> a.val-b.val);
+        
+        for(ListNode head : lists){
+            if(head!= null){
+                queue.add(head);
+            }
+        }
+        ListNode dummy = new ListNode(-1);
+        ListNode curr= dummy;
+        while(!queue.isEmpty()){
+            ListNode min = queue.poll();
+            curr.next= min;
+            curr=curr.next;
+            if(min.next!= null){
+                queue.add(min.next);
+            }
+        }
+
+        return dummy.next;
+    }
+}
