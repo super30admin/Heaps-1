@@ -1,0 +1,14 @@
+// Time Complexity o(nlogk) Space Compleity o(k)
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+      int res = Integer.MAX_VALUE;
+      PriorityQueue<Integer> q = new PriorityQueue<>((a,b)->b-a);
+      for(int num : nums){
+          q.add(num);
+          if(q.size()>nums.length-k){
+              res = Math.min(res,q.poll());
+          }
+      } 
+      return res;
+    }
+}
