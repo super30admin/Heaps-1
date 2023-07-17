@@ -1,5 +1,5 @@
-# Time Complexity : O()
-# Space Complexity : O()
+# Time Complexity : O(nlogl) where n is the total number of nodes, l is the number of lists
+# Space Complexity : O(l)
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : No
 
