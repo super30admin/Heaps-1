@@ -1,0 +1,34 @@
+// Time Complexity: O(Nlogk)
+// Space Complexity: O(k)
+// Did this code run on Leetcode: Yes
+// Any problem you faced while codeing this : No
+// Your code here along with comments explaining your approach
+ //We will store the heads of all the linked lists in a priority queue, storing the values of these nodes. Then we will smallest numbers one by one and store them in another LinkedList and return its head
+ class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> pq=new PriorityQueue<>((a,b)->a.val-b.val);
+        for(ListNode head:lists)
+        {
+            if(head!=null)
+            {
+                pq.add(head);       //store the heads in the priority queue
+            }
+        }
+        
+        ListNode dummy=new ListNode(-1);
+        ListNode curr=dummy;
+
+        while(!pq.isEmpty())
+        {
+            ListNode currMin=pq.poll(); //Pop the smallest node from the pq
+            curr.next=currMin;  //add the node to the result
+            curr=curr.next;     //move the pointer to the next node;
+            if(currMin.next!=null)  //If there are still nodes left in the CurrMin node, we add it to the pq
+            {
+                pq.add(currMin.next);
+            }
+        }
+
+        return dummy.next;      //return the node after the dummy head
+    }
+}
