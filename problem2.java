@@ -8,7 +8,7 @@
 
 // Your code here along with comments explaining your approach
 
-// Heaps more efficient
+// Heaps (more efficient)
 
 // approach: we put all the first element of the different lists in a min heap, remove the root element (minimum), add to the output list and then add the element next to the element removed (from the original list), to the heap.
 
