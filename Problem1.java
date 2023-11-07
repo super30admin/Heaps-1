@@ -1,4 +1,4 @@
-//Time  Complexity : O(logk)
+//Time  Complexity : O(nlogk)
 //Space Complexity : O(k)
 
 class Solution {
