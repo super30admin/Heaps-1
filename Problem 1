@@ -1,0 +1,27 @@
+# Kth Largest Element in an Array
+
+# Time complexity: O(n * log k), 
+# Space complexity: O(k)
+
+import heapq
+
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        # Create a min-heap of size k
+        heap = nums[:k]
+        heapq.heapify(heap)
+
+        # Traverse the remaining elements and update the heap
+        for num in nums[k:]:
+            if num > heap[0]:
+                heapq.heappop(heap)
+                heapq.heappush(heap, num)
+
+        # The root of the heap contains the kth largest element
+        return heap[0]
+
