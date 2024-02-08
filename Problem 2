@@ -1,0 +1,39 @@
+# Merge K sorted Sorted Lists
+
+time complexity: O(N * log k)
+space complexity: O(k)
+
+import heapq
+
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        # Define a min-heap to store the heads of the linked lists
+        min_heap = []
+        
+        # Push the heads of all the linked lists into the min-heap
+        for index, head in enumerate(lists):
+            if head:
+                heapq.heappush(min_heap, (head.val, index, head))
+        
+        # Create a dummy node to facilitate merging
+        dummy = ListNode()
+        current = dummy
+        
+        # Merge the lists
+        while min_heap:
+            # Pop the minimum element from the min-heap
+            val, index, node = heapq.heappop(min_heap)
+            
+            # Append the popped node to the merged list
+            current.next = node
+            current = current.next
+            
+            # Move to the next node in the linked list
+            if node.next:
+                heapq.heappush(min_heap, (node.next.val, index, node.next))
+        
+        # Set the next of the last node to None
+        current.next = None
+        
+        # Return the head of the merged list
+        return dummy.next
