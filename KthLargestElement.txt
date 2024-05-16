@@ -1,0 +1,46 @@
+Time Complexity: O(nlogn)
+Space complexity: none
+Approach : To sort an array in ascending order and find the kth element.
+class Solution {
+	//Find Kth largest element in arry
+    public int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+        int n=nums.length;
+        return nums[n-k];
+    }	
+}
+
+
+Time Complexity: O(nlogk)
+Space Complexity: O(k)
+Approach: This is solved using min heeap. Add elements to the heap and when the size of the heap is more than 'k' then pop the values.
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i=0;i<nums.length;i++){
+             pq.add(nums[i]);
+             if(pq.size()>k)
+                pq.poll();
+        }
+        return pq.poll();
+    }
+}
+
+
+Time Complexity: O(nlogk)
+Space Complexity: O(n-k)
+Approach: This is solved using maxheap. Add elements to the heap and when size of the heap (n-k) reaches then pop the values.
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->b-a);
+        int n=nums.length;
+        int prevPoll=Integer.MAX_VALUE;
+        for(int i=0;i<nums.length;i++){
+             pq.add(nums[i]);
+             if(pq.size()>n-k) {               
+                prevPoll=Math.min(pq.poll(), prevPoll);
+            }                
+        }
+        return prevPoll;
+    }
+}
