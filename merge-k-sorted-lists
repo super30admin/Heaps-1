@@ -1,0 +1,93 @@
+// Time Complexity :O(NlogK)-> N-> n*k where  k is the number of list and n is the number of nodes 
+// Space Complexity :O(k) -> k is the number of list 
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+ 
+
+// Your code here along with comments explaining your approach: here frist adding all nodes to pq and for pq sorting provided pq.val for minHeap because we need to show them in ascending order as well.
+// while pq is not emepty polling node by adding node.next element into pq and adding polled element to new linkedlist. 
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+      PriorityQueue<ListNode> pq=new PriorityQueue<>((a,b)->a.val-b.val);
+      for(ListNode head:lists){
+        if(head != null){
+            pq.add(head);
+        }
+      }
+      ListNode dummy=new ListNode(-1);
+      ListNode curr=dummy;
+      while(!pq.isEmpty()){
+          ListNode minNode=pq.poll();//log k
+          curr.next=minNode ;
+          curr=  curr.next;
+          if(minNode.next != null){
+            pq.add(minNode.next);
+          }
+      }
+      return dummy.next;
+    }
+  
+}
+
+// Time Complexity :O(Nk)-> N-> n*k where  k is the number of list and n is the number of nodes 
+// Space Complexity :O(1) 
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach: the approach is merging adjacent lists one by one while merging putting them in ascending order 
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode merged = new ListNode(Integer.MIN_VALUE);
+        for (ListNode listNode : lists) {
+            if(listNode ==null)continue;
+            merged = merge(merged, listNode);
+            
+        }
+        return merged.next;
+    }
+    private ListNode merge(ListNode p1,ListNode p2){
+              ListNode dummy=new ListNode(Integer.MIN_VALUE);
+              ListNode curr=dummy;
+              while(p1 != null && p2 != null){
+                if(p1.val <p2.val){
+                    curr.next=p1;
+                    p1=p1.next;
+               }else{
+                curr.next=p2;
+                p2=p2.next;
+               }
+               curr=curr.next;
+              }
+              
+              if(p1 != null){
+                curr.next=p1;
+              }
+               if(p2 != null){
+                curr.next=p2;
+              }
+              return dummy.next;
+    }
+}

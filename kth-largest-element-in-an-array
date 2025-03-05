@@ -1,0 +1,88 @@
+// Time Complexity :O(nlogn)
+// Space Complexity :O(nlogn)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:bruete force approach where i run the nested for loop and swap the elements to get sorted after that 
+//here we need largest element so i did sorting in descending order then return the nums[k-1] element
+
+//brueteforce
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(nums[i] > nums[j]){
+                    //sorting
+                    int temp=nums[j]; 
+                    nums[j]=nums[i];
+                    nums[i]=temp;
+                }
+            }
+        }
+      return nums[k-1];  
+    }
+}
+//Min_Heap
+// Time Complexity :O(nlogk) k:becuase here we are doing sorting for k elements only
+// Space Complexity :O(nlogk)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach:i have used min heap by reducing the complexity.by default heaps are min heaps so i did not put any sorting logic
+//for min heap and here i am putting elements into the PriorityQueue while putting elementings into the queue i adjust automatically least eleements to the top so when my queue size is greater than k then i will be polling elements and returning the peek element  
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int n=nums.length;
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+        for(int i=0;i<n;i++){ //O(n)
+           pq.add(nums[i]); //log k
+           if(pq.size() > k){
+            pq.poll();
+           }
+            }
+        return pq.peek();
+    }
+}
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int n=nums.length;
+        PriorityQueue<Integer> pq=new PriorityQueue<>((a,b) -> a-b);
+        for(int i=0;i<n;i++){ //O(n)
+           pq.add(nums[i]); //log k
+           if(pq.size() > k){
+            pq.poll();
+           }
+        }
+        
+        return pq.peek();
+    }
+}
+
+
+//Max_Heap
+// Time Complexity :O(nlog(n-k)) n-k :because we are doing sorting for n-k elements only
+// Space Complexity :O(nlog(n-k))
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+
+// Your code here along with comments explaining your approach: same approach as priorit queue but here i have used max heap so i defined logic for sorting where add elements into the stack and
+//where queue size is greater than n-k here its max heap so i poll the elemeents and put them in result for every poll finding min between them after n-k elements 
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int n=nums.length;
+        int result=Integer.MAX_VALUE;
+        PriorityQueue<Integer> pq=new PriorityQueue<>((a,b) -> b-a);
+        for(int i=0;i<n;i++){ //O(n)
+           pq.add(nums[i]); //log k
+           if(pq.size() > n-k){
+             result=Math.min(result,pq.poll());
+           }
+        }
+        return result;
+    }
+}
