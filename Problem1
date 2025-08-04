@@ -1,0 +1,18 @@
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if(nums == null || nums.length == 0){
+            return 0;
+        }
+        //using min heap, add nums and if size>k remove nums
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i=0; i< nums.length; i++){
+            pq.add(nums[i]);
+            //if size > k, remove min from min heap
+            if(pq.size() > k){
+                pq.poll();
+            }
+        }
+        //min heap have k max elements from nums
+        return pq.peek();
+    }
+}
