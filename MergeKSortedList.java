@@ -11,6 +11,27 @@
 // Repeat till all elements are added to PQ and polled
 
 public class MergeKSortedList {
+
+    public ListNode mergeKListsSorting(ListNode[] lists) {
+        List<ListNode> result = new ArrayList();
+        for(ListNode head:lists){
+            while(head!=null){
+                result.add(head);
+                head = head.next;
+            }
+        }
+
+        Collections.sort(result, (a,b) -> a.val - b.val);
+        ListNode dummy = new ListNode(-1);
+        ListNode curr = dummy;
+        for(ListNode node: result){
+            curr.next = node;
+            curr = curr.next;
+        }
+
+        return dummy.next;
+    }
+
     public ListNode mergeKLists(ListNode[] lists) {
 
         ListNode dummy = new ListNode(-1);
