@@ -30,18 +30,28 @@ Time: O(NK), Space: O(1)
 
 Time: O(N log N + (N-K+1) log N) = O((2N-K+1) log N), Space: O(N) (space since the heap is stored in a new array)
 
-5. Min heap of size K: Create a min heap by adding only K elements from the array. For the remaining N-K elements, add the next element from the array (size becomes K+1). Since size has exceeded K, remove the root element (min element) from the heap. Thus, each time we add an element from the remaining elements from the array, we lose the min element from the heap. For N-K elements, we lose N-K min elements. Thus, by the time we have finished adding all the elements from the array, we would have removed N-K min elements from the heap, and we would be left with remaining K elements in the heap. The root of the heap is the Kth largest element.
+5. Min heap of size K: Create a min heap by adding only K elements from the array. In order to add the remaining N-K elements to the heap one-by-one while maintaining the size of heap as K, we must lose N-K elements from the heap. Thus, add the next element from the array (size becomes K+1). Since size has exceeded K, remove the root element (min element) from the heap. Thus, each time we add an element from the remaining elements from the array, we lose the min element from the heap. For adding N-K elements, we lose N-K min elements from the top (root). We are left with remaining K elements in the heap which are the K largest elements. The root of the heap is the Kth largest element.
 
-Rule of Thumb: To find kth largest, use min heap
-               To find kth smallest, use max heap
+Rule of Thumb: To find kth largest, use min heap of size k
+               To find kth smallest, use max heap of size k
 
 https://youtu.be/PcrRJAwruKg?t=2493
 Time: O(K log K + (N-K) log K) = O(N log K), Space: O(K)
 
 
-6. Max heap of size N-K: This technique is complementary to the min heap of size K technique. With a max heap of size N-K, we get the max elements on the top of the heap for the first N-K elements. In order to be able to add the remaining K elements to the heap, we must pop out the K largest elements from the heap. The min of the K largest elements is the Kth largest element.
+6. Max heap of size N-K: This technique is complementary to the min heap of size K technique. When we construct a max heap of size N-K, we save the max elements out of the first N-K elements on the top of the heap. In order to add the remaining K elements to the heap, we must sacrifice K elements from the heap. Which elements do we sacrifice? Elements at the top of the heap. And top of the heap elements are the K largest elements that we have to let go. The min of the K largest elements is the Kth largest element whereas the heap is left with N-K min elements.
 
 Let m = inf. Create a max heap tree by adding only N-K elements from the array. For the remaining K elements, add the next element from the array (size becomes K+1). Since size has exceeded K, remove the root element (max element) from the heap. Store m=min(m, max element). Thus, each time we add an element from the remaining elements from the array, we lose the max element from the heap.
+
+Rule of Thumb:
+To find the kth largest element, use (a) or (b).
+a) min heap of size k. kth largest element is preserved at the top of heap
+b) max heap of size N-k. kth largest element is the min of the elements popped/lost from the heap.
+
+To find the kth smallest elemet, use (a) or (b).
+a) max heap of size k. kth smallest element is preserved at the top of heap
+b) min heap of size N-k. kth smallest element is the max of the elements popped/lost from the heap.
+
 https://youtu.be/PcrRJAwruKg?t=3340
 Time: O((N-K) log (N-K) + K log (N-K)) = O(N log N-K), Space: O(N-K)
 
