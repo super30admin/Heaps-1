@@ -1,0 +1,37 @@
+// Time Complexity: O(Nlogk), N = n*k 
+// Space Complexity: O(k)
+
+// Add the heads of all the lists into the min heap
+// Remove the root of the heap to get the smallest value every time
+// Add the next node of the node that was removed from the heap
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a,b) -> a.val - b.val);
+        for(ListNode node : lists) {
+            if(node != null)
+                minHeap.add(node);
+        }
+        ListNode dummy = new ListNode(-1);
+        ListNode curr = dummy;
+        while(!minHeap.isEmpty()) {
+            ListNode node = minHeap.poll();
+            curr.next = node;
+            curr = curr.next;
+            if(node.next != null)
+                minHeap.add(node.next);
+        }
+        return dummy.next;
+    }
+}
