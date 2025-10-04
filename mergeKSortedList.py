@@ -40,26 +40,28 @@ class Solution:
 
         return re.next
 
-    # Time complexity: O(nlogn)
+    # Time complexity: O(nlogk)
     # Space Complexity: O(n) using the heap
     # Did this code successfully run on Leetcode : Yes
     # Any problem you faced while coding this : No
 
-    #The intuition is to put all the values in min heap and then remove it and put it in result linked list
+    #The intuition is to put k values in min heap and then remove it and put it in result linked list
     def mergeKListsUsingHeap(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         min_heap = []
         dummy = ListNode(-1)
         result = dummy
-        for node in lists:
-            curr = node
-            while curr:
-                heapq.heappush(min_heap, curr.val)
-                curr = curr.next
+        for i, node in enumerate(lists):
+            if node:
+                heapq.heappush(min_heap, (node.val, i, node))
+
+        dummy = ListNode(-1)
+        curr = dummy
 
         while min_heap:
-            currVal = heapq.heappop(min_heap)
-            currNode = ListNode(currVal)
-            result.next = currNode
-            result = result.next
+            val, i, node = heapq.heappop(min_heap)
+            curr.next = node
+            curr = curr.next
+            if node.next != None:
+                heapq.heappush(min_heap, (node.next.val, i, node.next))
 
         return dummy.next
