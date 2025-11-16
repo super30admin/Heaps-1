@@ -616,7 +616,7 @@ printLinkedList(head)
 # merging 4 lists takes - 3n + n = 4n time
 # Total time = n * (1 + 2 + 3 + ------ K) = n * (k * (k -1) / 2) = n * (k ^ 2)
 # Time Complexity : O(n * k * k)
-# Space Complexity : O(1) -- we are merging the given nodes
+# Space Complexity : O(K) -- creating a dummy node in each iteration of merging
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : No
 
