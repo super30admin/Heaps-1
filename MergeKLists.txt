@@ -1,0 +1,46 @@
+// Time complexity: O(k2 logn)
+// space complexity: O(1)
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        
+        ListNode merged = new ListNode(Integer.MIN_VALUE);
+
+        for(ListNode list: lists) {
+
+            if(list != null) {
+            merge(merged, list);
+            }
+        }
+        return merged.next;
+    }
+
+    private ListNode merge(ListNode l1, ListNode l2) {
+
+        ListNode dummy = new ListNode(-1);
+        ListNode curr = dummy;
+        ListNode curr1 = l1;
+        ListNode curr2 = l2;
+
+        while(curr1 != null && curr2 != null) {
+
+            if(curr1.val < curr2.val) {
+                curr.next = curr1;
+                curr1 = curr1.next;
+            }
+            else {
+                curr.next = curr2;
+                curr2 = curr2.next;
+            }
+            curr = curr.next;
+        }
+
+        if(curr1 != null) {
+            curr.next = curr1;
+        }
+        if(curr2 != null) {
+            curr.next = curr2;
+        }
+
+        return dummy.next;
+    }
+}
